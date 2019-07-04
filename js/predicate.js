@@ -2,7 +2,7 @@
 function myParser(str){
 	if(KuantorCek(str) !== '0x000') { //============================ jika input berupa kuantor (semua x, beberapa x)
 		return KuantorCek(str);
-	}else if(PenghubungCek(str) !== '0x000') { //=================== jika input berupa (maka, dan, atau)
+	}else if(PenghubungCek(str) !== '0x000') { //=================== jika input berupa (maka, dan, atau, hanya)
 		return PenghubungCek(str);
 	}else{ //======================================================= misal (budi bapak ani --- bapak(budi,ani))
 		return BuatPredikat(str);
@@ -19,6 +19,7 @@ function KuantorCek(str){
 		output = globalGetRight(output,'setiap ');
 		output = globalGetRight(output,'tidak ada ');
 		output = globalRemover(output,' dimana');
+		output = globalRemover(output,' yang');
 		return '\u2200' + output + '.'; //========================== return special character + variabel
 	}else if(globalValidator(str,'beberapa ') //==================== jika input terdapat kata [beberapa, paling sedikit, ada] (kuantor khusus)
 	|| globalValidator(str,'paling sedikit ')
@@ -28,6 +29,7 @@ function KuantorCek(str){
 		output = globalGetRight(output,'ada satu ');
 		output = globalGetRight(output,'ada ');
 		output = globalRemover(output,' dimana');
+		output = globalRemover(output,' yang');
 		return '\u2203' + output + '.'; //========================== return special character + variabel
 	}
 	return '0x000'; //============================================== return 0x000 jika tidak valid
@@ -44,7 +46,7 @@ function PenghubungCek(str){
 	}else if(globalValidator(str,'atau') //========================= jika input berupa atau
 	&& str.length === 'atau'.length){
 		return '\u2228';
-	}else if(globalValidator(str,'jika dan hanya jika')){ //======== jika input berupa biimplikasi
+	}else if(globalValidator(str,'jika dan hanya jika')){ //======== jika input berupa bikondisi
 		return '\u2194';
 	}
 	return '0x000'; //============================================== return 0x000 jika tidak valid
