@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Logika Informatika 2</title>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script>
+	function show(id) {
+		if (document.getElementById) {
+			var divid = document.getElementById(id);
+			var divs = document.getElementsByClassName("mycontainer");
+			for (var i = 0; i < divs.length; i = i + 1) {
+				$(divs[i]).fadeOut(1000);
+			}
+			$(divid).fadeIn(1000);
+		}
+		return false;
+	}
+</script>
+<style>
+    body{
+        background-image: url("assets/background.jpg");
+        background-repeat: no-repeat;
+        background-size: 100%;
+        background-attachment: fixed;
+    }
+    .mycontainer{
+        position: absolute;
+		top: 50px;
+		left:0;
+		right:0;
+		padding:15%;
+		margin-left:auto;
+		margin-right:auto;
+		background-color: rgba(253, 253, 253, 0.9);
+        //height: 100%;
+        min-height: 768px;
+        width: 90%;
+        border:  2px solid #ccc;
+        border-radius: 10px;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-sm-12">
+			<div id="main" class="mycontainer">
+				<div class="form-group">
+					<p><strong>Inputkan Literal :</strong></p>
+					<textarea class="form-control" rows="16" id="IptProlog" style="resize: none;"></textarea>
+					<br>
+					<p><strong>Bahasa Predikat :</strong></p>
+					<input type="text" class="form-control" id="OutRslt">
+					<br>
+					<button type="submit" class="btn btn-success btn-block" onclick="myFunction()" value="Submit">Submit</button>
+				</div>
+				<div class="col-sm-6">
+					<a id="errMsg"></a>
+				</div>
+				<div class="col-sm-6 text-right">
+					<a onclick="return show('info');" style="cursor: pointer;">ⓘ</a>
+				</div>
+			</div>
+			
+			<div id="info" class="mycontainer" style="display:none">
+				<div class="col-sm-12 text-right">
+					<h3 onclick="return show('main');" style="cursor: pointer;">
+						<a>x</a>
+					</h3>
+				</div>
+				<div class="col-sm-12">
+					<p><strong>Contoh</strong></p>
+					<p>Natural : Semua bilangan integer mempunyai faktor prima</p>
+					<p>Literal : untuk setiap X dimana X adalah bilangan_integer maka X adalah mempunyai_faktor_prima</p>
+					<p>FOL     : ∀x.bilangan_integer(x)→mempunyai_faktor_prim(x)</p>
+					<br>
+					<p>Natural : Beberapa mahasiswa adalah intelektual</p>
+					<p>Literal : Paling sedikit ada satu X dimana X adalah mahasiswa dan X adalah intelektual</p>
+					<p>FOL     : ∃x.mahasiswa(x)∧intelektual(x)</p>
+					<br>
+					<br>
+					<p>Bapak(Tono,Budi)</p>
+					<p>Bapak(Budi,Andi)</p>
+					<br>
+					<p>Ekspresi Kakek dalam FOL adalah</p>
+					<p>Literal : untuk setiap x,y,z, y adalah bapak x, dan, y adalah anak z, maka, z adalah kakek x</p>
+					<p>FOL     : ∀x,y,z.bapak(y,x)∧anak(y,z)→kakek(z,x)</p>
+					<br>
+					<p>Ekspresi Anak pada FOL</p>
+					<p>Literal : untuk semua x,y, x bapak dari y, maka, y anak dari x</p>
+					<p>FOL     : ∀x,y.bapak(x,y)→anak(y,x)</p>
+				</div>
+			</div>
+        </div>
+    </div>
+</div>
+<script>
+        function myFunction() {
+            var str = document.getElementById('IptProlog').value.toLowerCase();
+			var array = str.split('\n'); //=================== pisah string input dalam array
+			var output = ''; //=============================== buat container untuk output
+
+			//================================================ cek jika form kosong
+			if(str.length == 0){
+                document.getElementById("errMsg").innerHTML = "Form tidak boleh kosong!";
+            }else{
+                document.getElementById("errMsg").innerHTML = " ";
+                //============================================ loop array dan jalankan parser
+				for (var i = 0; i < array.length; i++) {
+					output += myParser(array[i].trim()); //=== hasil output berupa (hasil return masing2 fungsi)
+				}
+				//console.log(output); //debug_line_can_be_removed
+				//============================================ set output pada OutRslt
+				document.getElementById('OutRslt').value = output;
+            }
+        }
+        </script>
+    
+        <!-- kumpulan function ========================================= -->
+        <script src="js/globalfunction.js"></script>
+        <script src="js/predicate.js"></script>
+</body>
+</html>
