@@ -8,6 +8,22 @@ program ini dapat mengubah bahasa literal menjadi bahasa predikat.
 ### Penggunaan
 Cukup buka link berikut <https://catzy007.github.io/logif2/>
 
+Contoh literal : 
+```
+Paling sedikit ada satu X dimana X adalah mahasiswa dan X adalah intelektual
+```
+Maka input berupa : 
+```
+Paling sedikit ada satu X dimana 
+X adalah mahasiswa 
+dan X 
+adalah intelektual
+```
+output berupa :
+```
+∃x.mahasiswa(x)∧intelektual(x)
+```
+
 ### Deployment
 * Clone [repo ini](https://github.com/catzy007/ProgramLogIf2/)
 * Copy ke `htdocs`
