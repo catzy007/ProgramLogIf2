@@ -13,4 +13,6 @@ Cukup buka link berikut <https://catzy007.github.io/logif2/>
 * Copy ke `htdocs`
 
 ### Kekurangan
- 
+* User diwajibkan untuk membagi kalimat literal dengan 1x enter (\n)
+* Negasi yang di dukung hanya (tidak, bukan, tidak benar)
+* Kata penghubung kalimat yang yang di dukung belum lengkap
