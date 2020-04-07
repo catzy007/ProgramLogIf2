@@ -16,8 +16,8 @@ Maka input berupa :
 ```
 Paling sedikit ada satu X dimana 
 X adalah mahasiswa 
-dan X 
-adalah intelektual
+dan 
+X adalah intelektual
 ```
 output berupa :
 ```
